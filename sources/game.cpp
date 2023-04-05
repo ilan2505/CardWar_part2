@@ -19,7 +19,7 @@ namespace ariel {
         if(p1.stacksize() == 0 || p2.stacksize() == 0){
              throw "Players cannot plays, ran out of cards."; 
         }else{
-            // need here to take card from each player - implement this
+
             Card playerOneCard = p1.drawCard();
             Card playerTwoCard = p2.drawCard();
 
@@ -79,7 +79,7 @@ namespace ariel {
 
     void Game::initializeDeck(){
         for (int s = 0; s < SUIT_SIZE; s++) {
-            for (int v = 1; v < 13; v++) {
+            for (int v = 1; v < VALUE_SIZE; v++) {
                 Card card(s, v);
                 deck.push_back(card);
             }
