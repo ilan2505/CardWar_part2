@@ -2,7 +2,7 @@
 
 #include<iostream>
 #include <string>
-#include <vector>
+#include <deque>
 
 #include "card.hpp"
 
@@ -14,16 +14,17 @@ namespace ariel
     {
         private:
             string name;
-            vector<Card> hand;
+            deque<Card> hand;
+        
             int cardsTaken;
         public:
             Player(const string& player_name): name(player_name), cardsTaken(0){}
             inline string playerName(){return this->name;}
-            // return a Ref to the hand field
-            inline const vector<Card>& getHand() const{ return hand; }
-            inline void addCardToHand(const Card& card){ hand.push_back(card);}
-            int stacksize ();
-            int cardesTaken ();
+            inline deque<Card>& getHand() { return hand; }
+            void addCardToHand(Card& card);
+            int stacksize();
+            int cardesTaken();
+            Card drawCard();
             
     }; // class Player
 

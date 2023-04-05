@@ -15,9 +15,28 @@ namespace ariel {
         Game::dealCardsToPlayers();
     }
 
-    void Game::playTurn(){ cout << "playTurn" << endl; }
+    void Game::playTurn(){ 
+        if(p1.stacksize() == 0 || p2.stacksize() == 0){
+             throw "Players cannot plays, ran out of cards."; 
+        }else{
+            // need here to take card from each player - implement this
+            Card playerOneCard = p1.drawCard();
+            Card playerTwoCard = p2.drawCard();
+
+            if (playerOneCard.getCardVal() > playerTwoCard.getCardVal()){
+                
+            }else if (playerOneCard.getCardVal() < playerTwoCard.getCardVal()){
+                
+            }else{
+                // Tie Breaker
+            }
+         }
+    }
     void Game::printLastTurn(){ cout << "printLastTurn" << endl; }
-    void Game::playAll(){ cout << "playAll" << endl; }
+
+    void Game::playAll(){
+         while (p1.stacksize() != 0 && p2.stacksize() != 0){ Game::playTurn(); }
+    }
 
     void Game::printWiner(){ 
 
@@ -60,7 +79,7 @@ namespace ariel {
 
     void Game::initializeDeck(){
         for (int s = 0; s < SUIT_SIZE; s++) {
-            for (int v = 1; v < VALUE_SIZE; v++) {
+            for (int v = 1; v < 13; v++) {
                 Card card(s, v);
                 deck.push_back(card);
             }
@@ -68,7 +87,7 @@ namespace ariel {
 
         srand( (time(NULL)));
         // Shuffle the deck
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < DECK_SIZE*DECK_SIZE; i++) {
 
             uint tmp1 = (uint) (rand() % DECK_SIZE);
             uint tmp2 = (uint) (rand() % DECK_SIZE);
@@ -86,9 +105,15 @@ namespace ariel {
         for (int i = 0; i < DECK_SIZE; i++) {
             if (isEven(i)) { 
                  p1.addCardToHand(deck [(unsigned long)i]);
+                //  cout << " stack " << p1.stacksize() << endl;
             } else {
                  p2.addCardToHand(deck [(unsigned long)i]);
             }
         }
+
+        // for (auto it = p1.getHand().begin(); it != p1.getHand().end(); ++it) {
+        //     Card c = *it;
+        //     std::cout << c.toString() << endl;
+        // }
     }
 }; // namespace ariel
