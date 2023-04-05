@@ -10,33 +10,54 @@ namespace ariel {
 
 
     Game::Game(Player& player1, Player& player2) : p1(player1), p2(player2){
-
+        Game::gameInitValidation();
         Game::initializeDeck();
         Game::dealCardsToPlayers();
-
     }
 
     void Game::playTurn(){ cout << "playTurn" << endl; }
     void Game::printLastTurn(){ cout << "printLastTurn" << endl; }
     void Game::playAll(){ cout << "playAll" << endl; }
-    void Game::printWiner(){  cout << "printWiner" << endl; }
+
+    void Game::printWiner(){ 
+
+        if (p1.cardesTaken() == p2.cardesTaken()){  throw "There is a tie, no one wins."; }
+        else {
+            if(p1.cardesTaken() > p2.cardesTaken()){
+                cout << p1.playerName() << endl;
+            }else{
+                cout << p2.playerName() << endl;
+            }
+        }
+    }
+
     void Game::printLog(){  cout << "printLog" << endl; }
     void Game::printStats(){ cout << "printStats" << endl; }
 
 
-    void Game::printDeck() {
-        for (auto it = deck.begin(); it != deck.end(); ++it) {
-            Card c = *it;
-            std::cout << c.to_string() << endl;
-        }
-    }
+    // void Game::printDeck() {
+    //     for (auto it = deck.begin(); it != deck.end(); ++it) {
+    //         Card c = *it;
+    //         std::cout << c.toString() << endl;
+    //     }
+    // }
 
 
 
 
 
     // Methods which the constructor is calling 
-    // to orgnize the code
+    // in order to orgnize the code
+    void Game::gameInitValidation(){
+        if (p1.stacksize() > 0 
+        || p2.stacksize() > 0
+        || p1.cardesTaken() > 0
+        || p2.cardesTaken() > 0)
+        {
+            throw "Players can't play - maybe someone is cheating. : cannot start the game if players has cards. ";
+        }
+    }
+
     void Game::initializeDeck(){
         for (int s = 0; s < SUIT_SIZE; s++) {
             for (int v = 1; v < VALUE_SIZE; v++) {
@@ -60,6 +81,7 @@ namespace ariel {
     }
 
     bool isEven(int i){ return i % 2 == 0;}
+
     void Game::dealCardsToPlayers(){
         for (int i = 0; i < DECK_SIZE; i++) {
             if (isEven(i)) { 

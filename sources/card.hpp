@@ -5,21 +5,21 @@ using namespace std;
 
 namespace ariel {
 
+    // This is for readability only
     enum Suit {SPADES, HEARTS, CLUBS, DIAMONDS};
-    enum Value {ACE = 1, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING = 13};
 
     class Card {
 
         private:
             Suit suit;
-            Value value;
-            int card_value;
+            int value;
+            int cardValue;
 
         public:
             Card(int sut, int val);
 
-            string to_string() const;
-            int get_card_value() const {return card_value;}
+            string toString() const;
+            int getCardVal() const {return cardValue;}
 
     }; // class Card
 

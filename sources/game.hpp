@@ -19,6 +19,8 @@ namespace ariel
         vector<Card> deck;
         void initializeDeck();
         void dealCardsToPlayers();
+        void gameInitValidation();
+
     public:
         Game(Player& player1, Player& player2);
         void playTurn();
@@ -27,7 +29,7 @@ namespace ariel
         void printLog();
         void printWiner();
         void printStats();
-        void printDeck();
+        // void printDeck();
 
     }; // class Game 
 

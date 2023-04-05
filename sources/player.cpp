@@ -8,10 +8,10 @@ namespace ariel
 {
 
     int Player::stacksize(){
-        return 1;
+        return hand.size();
     }
     int Player::cardesTaken(){
-        return 2;
+        return this->cardsTaken;
     }
 
 }; // namespace ariel
