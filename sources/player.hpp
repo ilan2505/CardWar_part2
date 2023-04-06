@@ -17,7 +17,7 @@ namespace ariel
             string name;
             deque<Card> hand;
             vector<Card> cardsWon;
-
+            int wins;
         public:
             Player(const string& player_name): name(player_name){}
             inline string playerName(){return this->name;}
@@ -28,6 +28,7 @@ namespace ariel
             Card drawCard();
             void addWinningCard(vector<Card>& cards);
             void addWinningCard(Card& card);
+            int getWins(){return this->wins;}
 
             
     }; // class Player

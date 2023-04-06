@@ -25,10 +25,12 @@ namespace ariel
     }
 
     void Player::addCardToHand(Card& card){
+        this->wins++;
         hand.push_back(card);
         // std::cout << "Player " << name << " hand size: " << hand.size() << std::endl;            
     }
     void Player::addWinningCard(vector<Card>& cards){
+        this->wins++;
         while (!cards.empty()) {
             Card card = cards.back();   
             cards.pop_back();           
@@ -37,6 +39,7 @@ namespace ariel
             // std::cout << "addWinningCard  " << card.toString() << std::endl; 
             // std::cout << name << " cardsWon size: " << cardsWon.size() << std::endl;    
         }
+        
     }
 
     void Player::addWinningCard(Card& card){

@@ -33,13 +33,15 @@ namespace ariel {
             Card playerTwoCard = p2.drawCard();
             currentTurn.push_back(playerOneCard);
             currentTurn.push_back(playerTwoCard);
+            log.push_back(p1.playerName() + " played " + playerOneCard.toString() + " " + p2.playerName() + " played " + playerTwoCard.toString() + ". ");
             if (playerOneCard.getCardVal() > playerTwoCard.getCardVal()){
                 p1.addWinningCard(currentTurn);
-  
+                log.back() += p1.playerName() + " wins. ";
             }else if (playerOneCard.getCardVal() < playerTwoCard.getCardVal()){
                 p2.addWinningCard(currentTurn);
-
+                log.back() += p2.playerName() + " wins. ";
             }else{
+                log.back() += " Draw. ";
                 tieBreakerHandler();
             }
          }
@@ -73,15 +75,21 @@ namespace ariel {
             currentTurn.push_back(playerOneCard);
             currentTurn.push_back(playerTwoCard);
 
+            log.back() += p1.playerName() + " played " + playerOneCard.toString() + " " + p2.playerName() + " played " + playerTwoCard.toString() + ". ";
+
             if (playerOneCard.getCardVal() > playerTwoCard.getCardVal()){
                 // cout << " DRAW END " << endl;
                 p1.addWinningCard(currentTurn);
+                log.back() += p1.playerName() + " wins. ";
                 break;
             }else if (playerOneCard.getCardVal() < playerTwoCard.getCardVal()){
                 // cout << " DRAW END " << endl;
                 p2.addWinningCard(currentTurn);
+                log.back() += p2.playerName() + " wins. ";
                 break;
             }
+            log.back() += " Draw. ";
+
         }
 
     }
@@ -100,7 +108,9 @@ namespace ariel {
         }
     }
 
-    void Game::printLastTurn(){ cout << "printLastTurn" << endl; }
+    void Game::printLastTurn(){
+         cout << log.back() << endl; 
+    }
 
     void Game::playAll(){
          while (p1.stacksize() != 0 && p2.stacksize() != 0){ Game::playTurn(); }
@@ -118,8 +128,26 @@ namespace ariel {
         }
     }
 
-    void Game::printLog(){  cout << "printLog" << endl; }
-    void Game::printStats(){ cout << "printStats" << endl; }
+    void Game::printLog(){
+        for (auto it = log.begin(); it != log.end(); ++it) {
+            string str = *it;
+            std::cout << str << endl;
+        }
+    }
+    void Game::printStats(){
+        double p1WinRate = 100.0 * p1.getWins() / (p1.getWins() + p2.getWins() + draws);
+        double p2WinRate = 100.0 * p2.getWins() / (p1.getWins() + p2.getWins() + draws);
+        double drawRate = 100.0 * draws / (p1.getWins() + p2.getWins() + draws);
+        cout << "| #### " << p1.playerName() << " Stats ####" << endl;
+        cout << "| Win rate: " << p1WinRate << "%" << endl;
+        cout << "| Cards won: " << p1.cardesTaken() << endl;
+        cout << endl;
+        cout << "| #### " << p2.playerName() << " Stats ####" << endl;
+        cout << "| Win rate: " << p2WinRate << "%" << endl;
+        cout << "| Cards won: " << p2.cardesTaken() << endl;
+        cout << endl;
+        cout << "| Draw rate: " << drawRate << "%" << endl;
+    }
 
 
     // void Game::printDeck() {
