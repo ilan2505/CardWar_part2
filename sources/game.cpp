@@ -41,6 +41,7 @@ namespace ariel {
                 p2.addWinningCard(currentTurn);
                 log.back() += p2.playerName() + " wins. ";
             }else{
+                draws++;
                 log.back() += " Draw. ";
                 tieBreakerHandler();
             }
@@ -88,6 +89,7 @@ namespace ariel {
                 log.back() += p2.playerName() + " wins. ";
                 break;
             }
+            draws++;
             log.back() += " Draw. ";
 
         }
