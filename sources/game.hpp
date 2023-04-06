@@ -18,10 +18,12 @@ namespace ariel
         Player& p1;
         Player& p2;
         vector<Card> deck;
+        vector<Card> currentTurn;
         void initializeDeck();
         void dealCardsToPlayers();
         void gameInitValidation();
-
+        void tieBreakerHandler();
+        void splitStash();
     public:
         Game(Player& player1, Player& player2);
         void playTurn();

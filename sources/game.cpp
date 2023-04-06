@@ -16,22 +16,90 @@ namespace ariel {
     }
 
     void Game::playTurn(){ 
+        // cout << "playTurn" << endl;
+        
         if(p1.stacksize() == 0 || p2.stacksize() == 0){
              throw "Players cannot plays, ran out of cards."; 
         }else{
 
+            Card frontP1 = p1.getHand().front();
+            Card frontP2 = p2.getHand().front();
+            if (frontP1.getCardVal() == frontP2.getCardVal() 
+             && frontP1.getSuit() == frontP2.getSuit()){
+                throw "Each card is unique - maybe we have one player."; 
+            }
+
             Card playerOneCard = p1.drawCard();
             Card playerTwoCard = p2.drawCard();
-
+            currentTurn.push_back(playerOneCard);
+            currentTurn.push_back(playerTwoCard);
             if (playerOneCard.getCardVal() > playerTwoCard.getCardVal()){
-                
+                p1.addWinningCard(currentTurn);
+  
             }else if (playerOneCard.getCardVal() < playerTwoCard.getCardVal()){
-                
+                p2.addWinningCard(currentTurn);
+
             }else{
-                // Tie Breaker
+                tieBreakerHandler();
             }
          }
     }
+
+    void Game::tieBreakerHandler(){
+        if(p1.stacksize() == 0 || p2.stacksize() == 0){
+            splitStash();
+            return;
+        }
+
+        while(true){
+            // cout << " DRAW " << endl;
+            if(p1.stacksize() == 0 || p2.stacksize() == 0){
+                splitStash();
+                return;
+            }
+
+            Card faceDownCardP1 = p1.drawCard();
+            Card faceDownCardP2 = p2.drawCard();
+            currentTurn.push_back(faceDownCardP1);
+            currentTurn.push_back(faceDownCardP2);
+
+            if(p1.stacksize() == 0 || p2.stacksize() == 0){
+                splitStash();
+                return;
+            }
+
+            Card playerOneCard = p1.drawCard();
+            Card playerTwoCard = p2.drawCard();
+            currentTurn.push_back(playerOneCard);
+            currentTurn.push_back(playerTwoCard);
+
+            if (playerOneCard.getCardVal() > playerTwoCard.getCardVal()){
+                // cout << " DRAW END " << endl;
+                p1.addWinningCard(currentTurn);
+                break;
+            }else if (playerOneCard.getCardVal() < playerTwoCard.getCardVal()){
+                // cout << " DRAW END " << endl;
+                p2.addWinningCard(currentTurn);
+                break;
+            }
+        }
+
+    }
+
+    void Game::splitStash(){
+        int half_size = currentTurn.size() / 2; 
+        for (int i = 0; i < half_size; i++) {
+            Card c = currentTurn.back(); 
+            currentTurn.pop_back();     
+            p1.addWinningCard(c);
+        }
+        for (int i = 0; i < half_size; i++) {
+            Card c = currentTurn.back(); 
+            currentTurn.pop_back();     
+            p2.addWinningCard(c);
+        }
+    }
+
     void Game::printLastTurn(){ cout << "printLastTurn" << endl; }
 
     void Game::playAll(){

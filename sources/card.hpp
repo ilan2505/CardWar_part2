@@ -13,13 +13,13 @@ namespace ariel {
         private:
             Suit suit;
             int value;
-            int cardValue;
 
         public:
             Card(int sut, int val);
 
             string toString() const;
-            int getCardVal() const {return cardValue;}
+            int getCardVal() const {return value;}
+            Suit getSuit() const {return suit;}
 
     }; // class Card
 
