@@ -45,6 +45,5 @@ namespace ariel {
         return valueAsString + " of " + suitAsString;
     }
 
-
 }
 

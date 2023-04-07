@@ -5,7 +5,7 @@ using namespace std;
 
 namespace ariel {
 
-    // This is for readability only
+    // This is for readability only - can use integers but this is more clear
     enum Suit {SPADES, HEARTS, CLUBS, DIAMONDS};
 
     class Card {
@@ -16,10 +16,11 @@ namespace ariel {
 
         public:
             Card(int sut, int val);
-
             string toString() const;
-            int getCardVal() const {return value;}
-            Suit getSuit() const {return suit;}
+
+            // #-#-# Getters #-#-#
+            inline int getCardVal() const {return value;}
+            inline Suit getSuit() const {return suit;}
 
     }; // class Card
 
