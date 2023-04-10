@@ -1,3 +1,14 @@
+/*
+References :
+ https://en.cppreference.com/w/cpp/container/deque
+ https://cplusplus.com/reference/deque/deque/
+ https://en.cppreference.com/w/cpp/container/deque/pop_front
+ https://en.cppreference.com/w/cpp/container/vector
+ https://cplusplus.com/reference/vector/vector/back/
+ https://www.digitalocean.com/community/tags/c-plus-plus
+ https://cplusplus.com/reference/cstdlib/rand/
+*/
+
 #include<iostream>
 #include <stdlib.h>
 #include <time.h>
